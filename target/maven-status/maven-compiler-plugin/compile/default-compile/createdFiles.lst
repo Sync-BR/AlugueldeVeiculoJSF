@@ -1,0 +1,7 @@
+beans\Clientebean.class
+Dao\UserDao.class
+beans\Usuariobean.class
+Dao\ClienteDao.class
+util\Config.class
+com\sistemadelogin\login\init.class
+util\Conexao.class

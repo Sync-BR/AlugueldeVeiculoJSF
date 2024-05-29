@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"     
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Aluguel de veiculos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form id="mainForm">
+            <p:commandButton value="Cadastrar Cliente" onclick="PF('Cadastrar').show();" type="button" />
+            <p:commandButton value="Editar Cliente" onclick="PF('Editar').show();" type="button" />
+            <p:commandButton value="Deletar Cliente" onclick="PF('dialogWidgetDeletar').show();" type="button" />
+        </h:form>
+
+
+
+        <p:dialog id="dialogId" widgetVar="Cadastrar" header="Adicionar Cliente" modal="true" closable="true">
+            <h:form id="cadastrarForm">
+                <h:outputLabel value="Nome:" />
+                <p:inputText value="#{Clientebean.nome}" />
+                <h:outputLabel value="Cpf" />
+                <p:inputText value="#{Clientebean.cpf}" />
+                <h:outputLabel value="Email" />
+                <p:inputText value="#{Clientebean.email}" />
+                <h:outputLabel value="Telefone" />
+                <p:inputText value="#{Clientebean.telefone}" />
+                <h:outputLabel value="Endereço" />
+                <p:inputText value="#{Clientebean.endereco}" />
+                <h:outputLabel value="UF" />
+                <p:inputText value="#{Clientebean.uf}" />
+                <p:commandButton value="Salvar" action="#{Clientebean.Registrar}" update=":mainForm" />
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="dialogId1" widgetVar="Editar" header="Editar Cliente" modal="true" closable="true">
+            <h:form id="editarForm">
+                
+                <p:selectOneMenu id="listaCliente" style="width:12rem" value="#{Clientebean.clienteSelecionado}">
+                    <f:selectItems value="#{Clientebean.listaDeClientes}" var="cliente" itemLabel="#{cliente}" itemValue="#{cliente}" />
+                    <p:ajax event="change" listener="#{Clientebean.onClienteChange}" update="ListadeClientes"/>
+                </p:selectOneMenu>
+
+                <h:outputLabel value="Nome:" />
+                <p:inputText value="#{Clientebean.nome}" />
+                <h:outputLabel value="Cpf" />
+                <p:inputText value="#{Clientebean.cpf}" />
+                <h:outputLabel value="Email" />
+                <p:inputText value="#{Clientebean.email}" />
+                <h:outputLabel value="Telefone" />
+                <p:inputText value="#{Clientebean.telefone}" />
+                <h:outputLabel value="Endereço" />
+                <p:inputText value="#{Clientebean.endereco}" />
+                <h:outputLabel value="UF" />
+                <p:inputText value="#{Clientebean.uf}" />
+                <p:commandButton value="Salvar" action="#{Clientebean.Editar}" update=":mainForm" />
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="dialogId2" widgetVar="dialogWidgetDeletar" header="Deletar Cliente" modal="true" closable="true">
+            <h:form id="deletarForm">
+                <h:outputLabel value="Cpf" />
+                <p:inputText value="#{Clientebean.cpf}" />
+                <p:commandButton value="Deletar" action="#{Clientebean.Deletar}" update=":mainForm" />
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
