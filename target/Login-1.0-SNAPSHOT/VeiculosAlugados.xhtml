@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Veículos Atrasados</title>
+    </h:head>
+    <h:body>
+        <h:form style="display: flex; background-color: black; color: white; text-align: center;">
+
+            <h:dataTable value="#{Veiculosatrasados.nome}" var="nome">
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                        #{nome}
+                </h:column>
+            </h:dataTable>
+
+
+            <h:dataTable value="#{Veiculosatrasados.veiculo}" var="veiculo">
+                <h:column>
+                    <f:facet name="header">Veículo</f:facet>
+                        #{veiculo}
+                </h:column>
+            </h:dataTable>
+
+
+            <h:dataTable value="#{Veiculosatrasados.valorPago}" var="valor">
+                <h:column>
+                    <f:facet name="header">Valor</f:facet>
+                        #{valor}
+                </h:column>
+            </h:dataTable>
+
+        </h:form>
+    </h:body>
+</html>

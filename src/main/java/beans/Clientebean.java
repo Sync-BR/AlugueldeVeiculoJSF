@@ -4,9 +4,12 @@ import Dao.ClienteDao;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import util.Config;
 
 /**
  *
@@ -28,7 +31,9 @@ public class Clientebean implements Serializable {
     private String Cpf;
     private List<String> ListaDeClientes;
     private String ClienteSelecionado;
+    private String VeiculoSelecionado;
 
+    Config config = new Config();
     /**
      * @init Metado de inicialização
      * @PostConstruct Iniciar o metado automatico.
@@ -59,10 +64,22 @@ public class Clientebean implements Serializable {
      * @onClienteChange Metado para retornar o cliente selecionado
      *
      */
-    public void onClienteChange(AjaxBehaviorEvent event) {
+    public void onClienteChange(AjaxBehaviorEvent event) throws Exception{
 
         System.out.println("Cliente selecionado: " + ClienteSelecionado);
-        // Aqui você pode adicionar a lógica para lidar com o cliente selecionado
+        Clientebean addcliente = new Clientebean();
+        ClienteDao buscar = new ClienteDao();
+        addcliente.setNome(ClienteSelecionado);
+        String dados = buscar.CarregarDados(addcliente);
+        String [] partes = dados.split("--");
+        this.Nome = partes[0];
+        this.Cpf = partes[1];
+        this.Telefone = partes[2];
+        this.Endereco = partes[3];
+        this.Email = partes[4];
+        this.Uf = partes[5];
+        System.out.println("Nome: " +Nome+ " Cpf: " +Cpf+" Telefone: " +Telefone+ " Endereço: "
+        +Endereco+" Email: " +Email+ " Uf: " +Uf);
     }
 
     /**
@@ -79,19 +96,13 @@ public class Clientebean implements Serializable {
         Addcliente.setEndereco(Endereco);
         Addcliente.setTelefone(Telefone);
         Addcliente.setUf(Uf);
-        System.out.println("Logs de parametros");
-        System.out.println(Addcliente.getNome());
-        System.out.println(Addcliente.getCpf());
-        System.out.println(Addcliente.getEmail());
-        System.out.println(Addcliente.getEndereco());
-        System.out.println(Addcliente.getUf());
-        System.out.println(Addcliente.getTelefone());
-        boolean teste = EditarCliente.Editar(Addcliente);
-        if (teste) {
-            System.out.println("Editado");
+        boolean Editado = EditarCliente.Editar(Addcliente);
+        if(Editado){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Editado cliente com sucesso."));  
         } else {
-            System.out.println("Falhou");
-        }
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falhou", "falhou ao editar um cliente"));          }
+        
+       
     }
 
     /**
@@ -111,10 +122,9 @@ public class Clientebean implements Serializable {
         Addcliente.setUf(Uf);
         boolean registrado = registrer.Register(Addcliente);
         if (registrado) {
-            System.out.println("Cadastrado");
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cliente adicionado com sucesso"));
         } else {
-            System.out.println("Falhou");
-        }
+ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "falhou", "Falhou ao adicionar cliente"));        }
     }
 
     /**
@@ -126,10 +136,15 @@ public class Clientebean implements Serializable {
         Clientebean DeletarCliente = new Clientebean();
         ClienteDao deleta = new ClienteDao();
         DeletarCliente.setCpf(Cpf);
-        deleta.Deletar(DeletarCliente);
+        boolean sucesso = deleta.Deletar(DeletarCliente);
+        if(sucesso){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Cliente deletado com sucesso"));
+        } else{
+         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "falhou", "Falhou ao deleta cliente"));  
+        }
     }
 
-    public Clientebean() throws Exception {
+    public Clientebean() {
     }
 
     public String getNome() {

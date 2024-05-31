@@ -24,33 +24,68 @@ public class ClienteDao {
      */
     Config config = new Config();
 
-    
-    public List<String> CarregarLista() throws Exception{
+    public String CarregarDados(Clientebean add) throws Exception {
+        System.out.println("Passei aqui");
+        String cpf = null;
+        String nome = null;
+        String telefone = null;
+        String endereco = null;
+        String email = null;
+        String uf = null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String Sql = "SELECT * FROM " + config.BancodeDados + config.Tabela_Clientes + " WHERE Nome = ?";
+        try {
+            conn = Conexao.getConnection();
+            ps = conn.prepareStatement(Sql);
+            ps.setString(1, add.getNome());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                nome = rs.getString("Nome");
+                cpf = rs.getString("Cpf");
+                telefone = rs.getString("Telefone");
+                endereco = rs.getString("Endereco");
+                email = rs.getString("Email");
+                uf = rs.getString("Uf");
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Conexao.closeConnection(conn, ps, rs);
+        }
+        return nome + "--" + cpf + "--" + telefone + "--" + endereco + "--" + email + "--" + uf;
+    }
+
+    /**
+     * @CarregarLista Carregar todos os nomes dos clientes
+     *
+     * @return Retornar a lista com os nomes dos clientes
+     * @throws Exception Se ocorrer algum erro durante o processo de buscar.
+     */
+    public List<String> CarregarLista() throws Exception {
         List<String> Lista = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM "+config.BancodeDados+config.Tabela_Clientes;
-        try{
+        String sql = "SELECT * FROM " + config.BancodeDados + config.Tabela_Clientes;
+        try {
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 Lista.add(rs.getString("Nome"));
             }
- 
-        } catch(SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             Conexao.closeConnection(conn, ps, rs);
         }
         return Lista;
     }
-    
-    
-    
-    
-    
+
     /**
      * Indicador do status do cadastro do cliente.
      */
@@ -159,6 +194,7 @@ public class ClienteDao {
         PreparedStatement ps = null;
 
         // Monta a consulta SQL para edição de um cliente.
+        //UPDATE autenticador.cliente SET Nome = 'Eduardo',  Endereco = 'BAIA', Uf = 'CA', Email = 'SYNCTDHA@GMAIL.COM', Telefone = '71981590122' WHERE Cpf = '061.260.395-44'
         String sql = "UPDATE " + config.BancodeDados + config.Tabela_Clientes
                 + " SET Nome = ?,  Endereco = ?, Uf = ?, Email = ?, Telefone = ? WHERE Cpf = ?";
 
@@ -209,8 +245,8 @@ public class ClienteDao {
 
         // Tenta registrar o cliente.
         List<String> Lista = p1.CarregarLista();
-        for(int index = 0; index < Lista.size(); index++){
-            System.out.println("Lista 2.0: " +Lista.get(index));
+        for (int index = 0; index < Lista.size(); index++) {
+            System.out.println("Lista 2.0: " + Lista.get(index));
         }
     }
 }

@@ -1,7 +1,15 @@
 D:\Projeto\Login\src\main\java\beans\Clientebean.java
 D:\Projeto\Login\src\main\java\beans\Usuariobean.java
+D:\Projeto\Login\src\main\java\Dao\AluguelDao.java
 D:\Projeto\Login\src\main\java\Dao\UserDao.java
-D:\Projeto\Login\src\main\java\util\Conexao.java
-D:\Projeto\Login\src\main\java\util\Config.java
+D:\Projeto\Login\src\main\java\Dao\VeiculoDao.java
+D:\Projeto\Login\src\main\java\beans\Faturamentobean.java
 D:\Projeto\Login\src\main\java\com\sistemadelogin\login\init.java
+D:\Projeto\Login\src\main\java\beans\Veiculobean.java
+D:\Projeto\Login\src\main\java\beans\VeiculosAtrasadosbean.java
+D:\Projeto\Login\src\main\java\util\Conexao.java
+D:\Projeto\Login\src\main\java\Dao\FaturamentoDao.java
+D:\Projeto\Login\src\main\java\util\Config.java
+D:\Projeto\Login\src\main\java\Dao\VeiculosAtrasadosDao.java
+D:\Projeto\Login\src\main\java\beans\Aluguelbean.java
 D:\Projeto\Login\src\main\java\Dao\ClienteDao.java

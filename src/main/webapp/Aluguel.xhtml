@@ -9,66 +9,99 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:p="http://primefaces.org/ui" 
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Aluguel de veiculos</title>
+        <title>Gerenciar Veiculos</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                 <link rel="stylesheet" href="./css/reset.css"/>
+    <link rel="stylesheet" href="./css/Style.css"/>
     </h:head>
     <h:body>
-        <h:form id="mainForm">
-            <p:commandButton value="Cadastrar Cliente" onclick="PF('Cadastrar').show();" type="button" />
-            <p:commandButton value="Editar Cliente" onclick="PF('Editar').show();" type="button" />
-            <p:commandButton value="Deletar Cliente" onclick="PF('dialogWidgetDeletar').show();" type="button" />
+         <nav>
+        <ul>
+            <li><a href="./principal.html">INICIO</a></li>
+            <li><a href="./Cliente.xhtml">Adicionar Cliente</a></li>
+            <li><a href="./Veiculos.xhtml">Adicionar Veiculos</a></li>
+            <li><a href="./Aluguel.xhtml">Alugar Veiculos</a></li>
+        </ul>
+    </nav>
+        <main>
+            
+        <h:form id="mainframe">
+            <p:growl id="growl" showDetail="true" sticky="false" life="3000"/>
+            <p:commandButton value="Alugar Veiculo" onclick="PF('Alugar').show();" type="button" />
+            <p:commandButton value="Editar Aluguel" onclick="PF('EditarAluguel').show();" type="button" />
+
         </h:form>
 
 
+        <p:dialog id="dialogId1" widgetVar="EditarAluguel" header="Editar Veiculos" modal="true" closable="true" width="300px" height="400px">
+            <h:form id="editarform">
 
-        <p:dialog id="dialogId" widgetVar="Cadastrar" header="Adicionar Cliente" modal="true" closable="true">
-            <h:form id="cadastrarForm">
-                <h:outputLabel value="Nome:" />
-                <p:inputText value="#{Clientebean.nome}" />
-                <h:outputLabel value="Cpf" />
-                <p:inputText value="#{Clientebean.cpf}" />
-                <h:outputLabel value="Email" />
-                <p:inputText value="#{Clientebean.email}" />
-                <h:outputLabel value="Telefone" />
-                <p:inputText value="#{Clientebean.telefone}" />
-                <h:outputLabel value="Endereço" />
-                <p:inputText value="#{Clientebean.endereco}" />
-                <h:outputLabel value="UF" />
-                <p:inputText value="#{Clientebean.uf}" />
-                <p:commandButton value="Salvar" action="#{Clientebean.Registrar}" update=":mainForm" />
-            </h:form>
-        </p:dialog>
-
-        <p:dialog id="dialogId1" widgetVar="Editar" header="Editar Cliente" modal="true" closable="true">
-            <h:form id="editarForm">
-                
-                <p:selectOneMenu id="listaCliente" style="width:12rem" value="#{Clientebean.clienteSelecionado}">
-                    <f:selectItems value="#{Clientebean.listaDeClientes}" var="cliente" itemLabel="#{cliente}" itemValue="#{cliente}" />
-                    <p:ajax event="change" listener="#{Clientebean.onClienteChange}" update="ListadeClientes"/>
+               
+                <p:selectOneMenu id="ListadeClientes" style="width:12rem" value="#{Aluguelbean.clienteSelecionado}">
+                    <f:selectItems value="#{Aluguelbean.listarVeiculosClientes}" var="clientes" itemLabel="#{clientes}" itemValue="#{clientes}" />
+                    <p:ajax event="change" listener="#{Aluguelbean.CarregarCarrosClientes}" update="editarform"/>
                 </p:selectOneMenu>
-
-                <h:outputLabel value="Nome:" />
-                <p:inputText value="#{Clientebean.nome}" />
-                <h:outputLabel value="Cpf" />
-                <p:inputText value="#{Clientebean.cpf}" />
-                <h:outputLabel value="Email" />
-                <p:inputText value="#{Clientebean.email}" />
-                <h:outputLabel value="Telefone" />
-                <p:inputText value="#{Clientebean.telefone}" />
-                <h:outputLabel value="Endereço" />
-                <p:inputText value="#{Clientebean.endereco}" />
-                <h:outputLabel value="UF" />
-                <p:inputText value="#{Clientebean.uf}" />
-                <p:commandButton value="Salvar" action="#{Clientebean.Editar}" update=":mainForm" />
+                <br/>
+                <h:outputLabel value="Data do aluguel" />
+                <p:inputText type="date" value="#{Aluguelbean.dataAtualSTR}" />
+                <br/>
+                <h:outputLabel value="Data de vencimento" />
+                <p:inputText type="date" value="#{Aluguelbean.dataVencimentoSTR}" />
+                <br/>
+                <h:outputLabel value="Entregue:" />
+                <p:inputText value="#{Aluguelbean.entregue}" />
+                <br/>
+                <h:outputLabel value="Observacao:" />
+                <p:inputText value="#{Aluguelbean.observacao}" />
+                <br/>
+                <h:outputLabel value="ValorPago" />
+                <p:inputText value="#{Aluguelbean.valorPago}" />
+                <br/>
+                <p:commandButton value="Editar" action="#{Aluguelbean.EditarAluguel}" oncomplete="PF('EditarAluguel').hide()" update="mainframe"/>
+                <p:commandButton value="Deletar" action="#{Aluguelbean.DeletarAluguel}" oncomplete="PF('EditarAluguel').hide()" update="mainframe"/>
+                
+                
             </h:form>
         </p:dialog>
 
-        <p:dialog id="dialogId2" widgetVar="dialogWidgetDeletar" header="Deletar Cliente" modal="true" closable="true">
-            <h:form id="deletarForm">
-                <h:outputLabel value="Cpf" />
-                <p:inputText value="#{Clientebean.cpf}" />
-                <p:commandButton value="Deletar" action="#{Clientebean.Deletar}" update=":mainForm" />
+        
+        
+        
+        <p:dialog id="dialogId" widgetVar="Alugar" header="Adicionar Veiculos" modal="true" closable="true" width="300px" height="400px">
+            <h:form id="cadastrarForm">
+
+                <p:selectOneMenu id="ListadeVeiculos" style="width:12rem" value="#{Aluguelbean.veiculoSelecionado}">
+                    <f:selectItems value="#{Aluguelbean.listarVeiculos}" var="veiculos" itemLabel="#{veiculos}" itemValue="#{veiculos}" />
+                    <p:ajax event="change" listener="#{Aluguelbean.onClienteChange}" update="cadastrarForm"/>
+                </p:selectOneMenu>
+                <br/>
+                <h:outputLabel value="Veiculo:" />
+                <p:inputText value="#{Aluguelbean.consultarVeiculos.modelo}" />
+                <br/>
+                <h:outputLabel value="Data do Aluguel:" />
+                <p:inputText type="date" value="#{Aluguelbean.dataAtualSTR}" />
+                <br/>
+                <h:outputLabel value="Data da Entrega:" />
+                <p:inputText type="date" value="#{Aluguelbean.dataVencimentoSTR}" />
+                <br/>
+                <p:selectOneMenu id="ListadeClientes" style="width:12rem" value="#{Aluguelbean.clienteSelecionado}">
+                    <f:selectItems value="#{Aluguelbean.listarClientes}" var="clientes" itemLabel="#{clientes}" itemValue="#{clientes}" />
+                    <p:ajax event="change" listener="#{Aluguelbean.Dadosclientes}" update="cadastrarForm"/>
+                </p:selectOneMenu>
+                <br/>
+                <h:outputLabel value="Entregue:" />
+                <p:inputText value="#{Aluguelbean.entregue}" />
+                <br/>
+                <h:outputLabel value="Observacao:" />
+                <p:inputText value="#{Aluguelbean.observacao}" />
+                <br/>
+                <h:outputLabel value="ValorPago" />
+                <p:inputText value="#{Aluguelbean.valorPago}" />
+                <p:commandButton value="Registrar" action="#{Aluguelbean.VerificarAlugueis}" oncomplete="PF('Alugar').hide()" update="mainframe"/>
             </h:form>
         </p:dialog>
+
+        </main>
+
     </h:body>
 </html>

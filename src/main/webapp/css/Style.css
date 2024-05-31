@@ -3,9 +3,27 @@ background-color: black;
 color: white;
 
 }
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 28px;
+
+}
+nav {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.517);
+    border: 1px solid red;
+}
+nav li{
+    list-style: none;
+}
+nav ul{
+    display: flex;
+    gap: 15px;
+}
 
 main{
-    color: black;
+    background-color: rgba(255, 255, 255, 0.235);
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -13,18 +31,5 @@ main{
     align-items: center;
  
 }
-form{
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 50%;
-    align-content: center;
-}
-.button{
-    width: 400px;
-    width: 100%;
-}
+
 
