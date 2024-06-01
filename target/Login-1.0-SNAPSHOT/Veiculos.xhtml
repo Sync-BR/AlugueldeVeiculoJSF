@@ -15,18 +15,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <link rel="stylesheet" href="./css/Style.css"/>
     </h:head>
     <h:body>
-         <nav>
-        <ul>
-            <li><a href="./principal.html">INICIO</a></li>
-            <li><a href="./Cliente.xhtml">Adicionar Cliente</a></li>
-            <li><a href="./Veiculos.xhtml">Adicionar Veiculos</a></li>
-            <li><a href="./Aluguel.xhtml">Alugar Veiculos</a></li>
-        </ul>
-    </nav>
+        
+        <header>
+            <img src="./img/Header.png" alt="Logo"/>
+        </header>
+        <div id="Pagina">
+            <nav>
+                <li><a href="./Dashboard.jsp">INICIO</a></li>
+                <li><a href="./Cliente.xhtml">Clientes</a></li>
+                <li><a href="./Veiculos.xhtml">Veículos</a></li>
+                <li><a href="./Aluguel.xhtml">Aluguel</a></li>
+            </nav>
         <main>
-
-
-
             <h:form id="mainframe">
                 <p:growl id="growl" showDetail="true" sticky="false" life="3000"/>
                 <p:commandButton value="Registrar" onclick="PF('Cadastrar').show();" type="button" />
@@ -89,5 +89,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 </h:form>
             </p:dialog>
         </main>
+        </div>
+
     </h:body>
 </html>

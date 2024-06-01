@@ -5,11 +5,13 @@ Dao\ClienteDao.class
 beans\VeiculosAtrasadosbean.class
 com\sistemadelogin\login\init.class
 beans\Faturamentobean.class
+simples\Tabela.class
 Dao\FaturamentoDao.class
 Dao\UserDao.class
 beans\Aluguelbean.class
 Dao\VeiculosAtrasadosDao.class
 beans\Usuariobean.class
 util\Config.class
+simples\Contador.class
 Dao\VeiculoDao.class
 util\Conexao.class
