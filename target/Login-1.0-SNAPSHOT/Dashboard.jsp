@@ -4,6 +4,7 @@
     Author     : Eduar
 --%>
 
+<%@page import="beans.Faturamentobean"%>
 <%@page import="simples.Tabela"%>
 <%@page import="simples.Contador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%> 
@@ -30,10 +31,23 @@
                 <li><a href="./Aluguel.xhtml">Aluguel</a></li>
             </nav>
             <main>
+                <div class="Faturamento">
+                    <h1>Faturamento Registrado</h1>
+                    <div class="containerCirculos">
+                    <%
+                        Faturamentobean addfaturamento = new Faturamentobean();
+                        addfaturamento.ConsultarFaturamento();
+                        out.print(" <strong>"+addfaturamento.getTotalSTR()+"</strong>");
+                    %>
+                    </div>
+                    </br>
+                    <strong>Consultar faturamento<a href="./Faturamento.xhtml"> Faturamento</a> </strong>
+                </div>
                 <div class="contador">
                     <div>
                         <!-- Contador de clientes -->
                         <img src="./img/Clientes].png" alt="Clientes" width="200px">
+                        <h2>Total de Clientes</h2>
                         <%
                             Contador clientes = new Contador();
                             int TotalClientes = clientes.ContarClientes();
@@ -45,6 +59,7 @@
                     <div>
                         <!-- Contador de veículos -->
                         <img src="./img/veiculos.png" alt="Veiculos" width="200px">
+                        <h2>Total de Veículos</h2>
                         <%
                             int TotalVeiculos = clientes.ContarVeiculos();
                             out.print("<h2>" + TotalVeiculos + "</h2>");
@@ -53,6 +68,7 @@
                     <div>
                         <!-- Contador de aluguel -->
                         <img src="./img/Alugados.png" alt="Alugados" width="200px">
+                        <h2>Total de Alugueis</h2>
                         <%
                             int TotalAluguel = clientes.ContarAluguel();
                             out.print("<h2>" + TotalAluguel + "</h2>");
@@ -97,7 +113,7 @@
                     <h2>Veículos não entregue</h2>
                     <table>
                         <caption>
-                            Veículos não entreguess
+                            Veículos não entregues
                         </caption>
                         <thead>
                             <tr>

@@ -37,6 +37,27 @@ main{
     color: black;
     width: 100%;
 }
+.Faturamento{
+  display: flex;
+  flex-direction: column;
+ align-items: center;
+ font-size: 14px;
+height: 40vh;
+
+}
+.containerCirculos strong{
+  font-size: 3rem;
+}
+.containerCirculos{
+  border: 5px solid black;
+  width: 25vw;
+  height: 30vh;
+  border-radius: 200%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .contador{
     width: 100%;
