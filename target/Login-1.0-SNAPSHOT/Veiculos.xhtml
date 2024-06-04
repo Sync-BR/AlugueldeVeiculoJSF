@@ -15,9 +15,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <link rel="stylesheet" href="./css/Style.css"/>
     </h:head>
     <h:body>
-        
+
         <header>
             <img src="./img/Header.png" alt="Logo"/>
+            
         </header>
         <div id="Pagina">
             <nav>
@@ -26,69 +27,79 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 <li><a href="./Veiculos.xhtml">Veículos</a></li>
                 <li><a href="./Aluguel.xhtml">Aluguel</a></li>
             </nav>
-        <main>
-            <h:form id="mainframe">
-                <p:growl id="growl" showDetail="true" sticky="false" life="3000"/>
-                <p:commandButton value="Registrar" onclick="PF('Cadastrar').show();" type="button" />
-                <p:commandButton value="Editar" onclick="PF('Editar').show();" type="button" />
-            </h:form>
-
-            <p:dialog id="dialogId" widgetVar="Cadastrar" header="Adicionar Veiculos" modal="true" closable="true" width="300px" height="400px">
-                <h:form id="cadastrarForm">
-                    <h:outputLabel value="Número:"/>
-                    <p:inputText value="#{Veiculobean.numero}"/>
-                    <br/>
-                    <h:outputLabel value="Placa:"/>
-                    <p:inputText value="#{Veiculobean.placa}"/>
-                    <br/>
-                    <h:outputLabel value="Fabricante"/>
-                    <p:inputText value="#{Veiculobean.fabricante}"/>
-                    <br/>
-                    <h:outputLabel value="Modelo:"/>
-                    <p:inputText value="#{Veiculobean.modelo}"/>
-                    <br/>
-                    <h:outputLabel value="AnoModelo:"/>
-                    <p:inputText value="#{Veiculobean.anoModelo}"/>
-                    <br/>
-                    <h:outputLabel value="QtdPortas:"/>
-                    <p:inputText value="#{Veiculobean.qtdPortas}"/>
-                    <br/>
-                    <h:outputLabel value="Acessorio:"/>
-                    <p:inputText value="#{Veiculobean.acessorio}"/>
-                    <br/>
-                    <p:commandButton value="Registrar" action="#{Veiculobean.Registra}" oncomplete="PF('Cadastrar').hide()" update="mainframe:growl"/>
+            <main>
+                <h:form id="mainframe">
+                    <p:growl id="growl" showDetail="true" sticky="false" life="3000"/>
+                    <p:commandButton value="Registrar" onclick="PF('Cadastrar').show();" type="button" />
+                    <p:commandButton value="Editar" onclick="PF('Editar').show();" type="button" />
+                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" header="Confirmação" severity="alert" widgetVar="confirmDialog">
+                            <h:outputText value="Tem certeza que deseja deletar?" />
+                            <p:commandButton value="Sim" action="#{Veiculobean.Deletar}" update=":mainframe:growl" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('Editar').hide();PF('confirmDialog').hide();" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
                 </h:form>
-            </p:dialog>
+
+                <p:dialog id="dialogId" widgetVar="Cadastrar" header="Adicionar Veiculos" modal="true" closable="true" width="300px" height="400px">
+                    <h:form id="cadastrarForm">
+                        <h:outputLabel value="Número:"/>
+                        <p:inputText value="#{Veiculobean.numero}"/>
+                        <br/>
+                        <h:outputLabel value="Placa:"/>
+                        <p:inputText value="#{Veiculobean.placa}"/>
+                        <br/>
+                        <h:outputLabel value="Fabricante"/>
+                        <p:inputText value="#{Veiculobean.fabricante}"/>
+                        <br/>
+                        <h:outputLabel value="Modelo:"/>
+                        <p:inputText value="#{Veiculobean.modelo}"/>
+                        <br/>
+                        <h:outputLabel value="AnoModelo:"/>
+                        <p:inputText value="#{Veiculobean.anoModelo}"/>
+                        <br/>
+                        <h:outputLabel value="QtdPortas:"/>
+                        <p:inputText value="#{Veiculobean.qtdPortas}"/>
+                        <br/>
+                        <h:outputLabel value="Acessorio:"/>
+                        <p:inputText value="#{Veiculobean.acessorio}"/>
+                        <br/>
+                        <p:commandButton value="Registrar" action="#{Veiculobean.Registra}" oncomplete="PF('Cadastrar').hide()" update="mainframe:growl"/>
+                    </h:form>
+                </p:dialog>
 
 
-            <p:dialog id="dialogId1" widgetVar="Editar" header="Editar veiculos" modal="true" closable="true" width="300px" height="450px">
-                <h:form id="editarForm">
-                    <p:selectOneMenu id="listaCliente" style="width:12rem" value="#{Veiculobean.veiculoSelecionado}">
-                        <f:selectItems value="#{Veiculobean.listarDeVeiculos}" var="cliente" itemLabel="#{cliente}" itemValue="#{cliente}" />
-                        <p:ajax event="change" listener="#{Veiculobean.onClienteChange}" update="editarForm"/>
-                    </p:selectOneMenu>
+                <p:dialog id="dialogId1" widgetVar="Editar" header="Editar veiculos" modal="true" closable="true" width="300px" height="450px">
+                    <h:form id="editarForm">
+                        <p:selectOneMenu id="listaCliente" style="width:12rem" value="#{Veiculobean.veiculoSelecionado}">
+                            <f:selectItems value="#{Veiculobean.listarDeVeiculos}" var="cliente" itemLabel="#{cliente}" itemValue="#{cliente}" />
+                            <p:ajax event="change" listener="#{Veiculobean.onClienteChange}" update="editarForm"/>
+                        </p:selectOneMenu>
 
-                    <h:outputLabel value="Número:"/>
-                    <p:inputText value="#{Veiculobean.numero}"/>
-                    <h:outputLabel value="Placa:"/>
-                    <p:inputText value="#{Veiculobean.placa}"/>
-                    <h:outputLabel value="Fabricante"/>
-                    <p:inputText value="#{Veiculobean.fabricante}"/>
-                    <h:outputLabel value="Modelo:"/>
-                    <p:inputText value="#{Veiculobean.modelo}"/>
-                    <h:outputLabel value="AnoModelo:"/>
-                    <p:inputText value="#{Veiculobean.anoModelo}"/>
-                    <h:outputLabel value="QtdPortas:"/>
-                    <p:inputText value="#{Veiculobean.qtdPortas}"/>
-                    <h:outputLabel value="Acessorio:"/>
-                    <p:inputText value="#{Veiculobean.acessorio}"/>
-                    <br/>
-                    <p:commandButton value="Salvar" action="#{Veiculobean.Atualizar}" oncomplete="PF('Editar').hide()" update="mainframe:growl" />
+                        <h:outputLabel value="Número:"/>
+                        <p:inputText value="#{Veiculobean.numero}"/>
+                        <h:outputLabel value="Placa:"/>
+                        <p:inputText value="#{Veiculobean.placa}"/>
+                        <h:outputLabel value="Fabricante"/>
+                        <p:inputText value="#{Veiculobean.fabricante}"/>
+                        <h:outputLabel value="Modelo:"/>
+                        <p:inputText value="#{Veiculobean.modelo}"/>
+                        <h:outputLabel value="AnoModelo:"/>
+                        <p:inputText value="#{Veiculobean.anoModelo}"/>
+                        <h:outputLabel value="QtdPortas:"/>
+                        <p:inputText value="#{Veiculobean.qtdPortas}"/>
+                        <h:outputLabel value="Acessorio:"/>
+                        <p:inputText value="#{Veiculobean.acessorio}"/>
+                        <br/>
+                        <p:commandButton value="Salvar" action="#{Veiculobean.Atualizar}" oncomplete="PF('Editar').hide()" update="mainframe:growl" />
 
-                    <p:commandButton value="Excluir" action="#{Veiculobean.Deletar}" oncomplete="PF('Editar').hide()" update="mainframe:growl"/>
-                </h:form>
-            </p:dialog>
-        </main>
+
+
+
+                        <!-- Botão de Deletar -->
+                        <p:commandButton id="deleteButton" value="Deletar" action="#{Veiculobean.Deletar}" update="mainframe:growl" oncomplete="PF('Editar').hide()" onclick="PF('confirmDialog').show(); return false;" />
+
+                    </h:form>
+                </p:dialog>
+            </main>
         </div>
 
     </h:body>

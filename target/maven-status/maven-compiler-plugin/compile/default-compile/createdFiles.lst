@@ -1,6 +1,8 @@
 beans\Clientebean.class
 Dao\AluguelDao.class
+beans\VeiculosAlugadosbean.class
 beans\Veiculobean.class
+Dao\VeiculosAlugadosDao.class
 Dao\ClienteDao.class
 beans\VeiculosAtrasadosbean.class
 com\sistemadelogin\login\init.class

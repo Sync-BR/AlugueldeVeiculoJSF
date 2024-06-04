@@ -9,7 +9,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:p="http://primefaces.org/ui" 
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Gerenciar Veiculos</title>
+        <title>Gerenciar Aluguel</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="./css/reset.css"/>
         <link rel="stylesheet" href="./css/Style.css"/>
@@ -33,17 +33,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 <p:growl id="growl" showDetail="true" sticky="false" life="3000"/>
                 <p:commandButton value="Alugar Veiculo" onclick="PF('Alugar').show();" type="button" />
                 <p:commandButton value="Editar Aluguel" onclick="PF('EditarAluguel').show();" type="button" />
+                                          <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" header="Confirmação" severity="alert" widgetVar="confirmDialog">
+                            <h:outputText value="Tem certeza que deseja deletar?" />
+                            <p:commandButton value="Sim" action="#{Aluguelbean.DeletarAluguel}" update=":mainframe:growl" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('EditarAluguel').hide();PF('confirmDialog').hide();" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
 
             </h:form>
 
 
-            <p:dialog id="dialogId1" widgetVar="EditarAluguel" header="Editar Veiculos" modal="true" closable="true" width="300px" height="400px">
+            <p:dialog id="dialogId1" widgetVar="EditarAluguel" header="Editar Aluguel" modal="true" closable="true" width="300px" height="400px">
                 <h:form id="editarform">
 
 
                     <p:selectOneMenu id="ListadeClientes" style="width:12rem" value="#{Aluguelbean.clienteSelecionado}">
                         <f:selectItems value="#{Aluguelbean.listarVeiculosClientes}" var="clientes" itemLabel="#{clientes}" itemValue="#{clientes}" />
-                        <p:ajax event="change" listener="#{Aluguelbean.CarregarCarrosClientes}" update="editarform"/>
+                        <p:ajax event="change" listener="#{Aluguelbean.AlugueldoCliente}" update="editarform"/>
                     </p:selectOneMenu>
                     <br/>
                     <h:outputLabel value="Data do aluguel" />
@@ -62,7 +67,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <p:inputText value="#{Aluguelbean.valorPago}" />
                     <br/>
                     <p:commandButton value="Editar" action="#{Aluguelbean.EditarAluguel}" oncomplete="PF('EditarAluguel').hide()" update="mainframe"/>
-                    <p:commandButton value="Deletar" action="#{Aluguelbean.DeletarAluguel}" oncomplete="PF('EditarAluguel').hide()" update="mainframe"/>
+
+
+                        <p:commandButton id="deleteButton" value="Deletar" action="#{Aluguelbean.DeletarAluguel}" update=":mainframe:growl" oncomplete="PF('EditarAluguel').hide()" onclick="PF('confirmDialog').show(); return false;" />
+                    
+                    
 
 
                 </h:form>
@@ -71,7 +80,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
 
 
-            <p:dialog id="dialogId" widgetVar="Alugar" header="Adicionar Veiculos" modal="true" closable="true" width="300px" height="400px">
+            <p:dialog id="dialogId" widgetVar="Alugar" header="Adicionar Aluguel" modal="true" closable="true" width="300px" height="400px">
                 <h:form id="cadastrarForm">
 
                     <p:selectOneMenu id="ListadeVeiculos" style="width:12rem" value="#{Aluguelbean.veiculoSelecionado}">

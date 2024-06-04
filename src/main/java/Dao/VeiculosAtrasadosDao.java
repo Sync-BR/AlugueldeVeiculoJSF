@@ -20,7 +20,7 @@ public class VeiculosAtrasadosDao {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM " + config.BancodeDados + config.Tabela_aluguel;
+        String sql = "SELECT * FROM " + config.BancodeDados + config.Tabela_aluguel + " where Entregue = 'n'";
         try {
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(sql);
@@ -40,7 +40,7 @@ public class VeiculosAtrasadosDao {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM " + config.BancodeDados + config.Tabela_aluguel ;
+        String sql = "SELECT * FROM " + config.BancodeDados + config.Tabela_aluguel + " where Entregue = 'n'";
         try {
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class VeiculosAtrasadosDao {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "SELECT * FROM " + config.BancodeDados + config.Tabela_aluguel ;
+        String sql = "SELECT * FROM " + config.BancodeDados + config.Tabela_aluguel + " where Entregue = 'n'";
         try {
             conn = Conexao.getConnection();
             ps = conn.prepareStatement(sql);

@@ -48,7 +48,7 @@ public class Usuariobean implements Serializable {
         boolean AutenticarSucesso = p1.Autenticar(adduser);
 
         if (AutenticarSucesso) {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("principal.html");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("Dashboard.jsp");
             return null;
         } else {
             FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario ou senha incorretos", null);

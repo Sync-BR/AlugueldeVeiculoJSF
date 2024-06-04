@@ -87,8 +87,11 @@ public class Aluguelbean {
     }
 
     public void CarregarCarrosClientes(AjaxBehaviorEvent event) throws Exception {
-
-        System.out.println("Log cliente: " + ClienteSelecionado);
+        AluguelDao buscarCliente = new AluguelDao();
+        Aluguelbean add = new Aluguelbean();
+        add.setClienteNome(ClienteSelecionado);
+        buscarCliente.BuscarCliente(add);
+        
 
     }
 

@@ -13,7 +13,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>DashBoard</title>
         <link rel="stylesheet" href="./css/reset.css">
         <link rel="stylesheet" href="./css/Dashboard.css">
         <link rel="icon" href="./img/logo.png" type="image/x-icon">
@@ -41,7 +41,7 @@
                     %>
                     </div>
                     </br>
-                    <strong>Consultar faturamento<a href="./Faturamento.xhtml"> Faturamento</a> </strong>
+                    <strong>Consultar faturamento<a href="./Faturamento.xhtml" target="_blank"> Faturamento</a> </strong>
                 </div>
                 <div class="contador">
                     <div>
@@ -79,7 +79,7 @@
                     <h2>Veículos Alugados</h2>
                     <table>
                         <caption>
-                            Veículos Alugados <a href="./VeiculosAlugados.xhtml" target="_blank">Consulta</a>
+                            Veículos Alugados <a href="./VeiculosAlugados.xhtml" target="_blank">Consultar</a>
                         </caption>
                         <thead>
                             <tr>
@@ -113,7 +113,7 @@
                     <h2>Veículos não entregue</h2>
                     <table>
                         <caption>
-                            Veículos não entregues
+                            Veículos não entregues <a href="./VeiculosAlugadoseNaoEntregue.xhtml" target="_blank">Consultar</a>
                         </caption>
                         <thead>
                             <tr>
