@@ -35,17 +35,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
                     <p:commandButton value="Cadastrar Cliente" onclick="PF('Cadastrar').show();" type="button" />
                     <p:commandButton value="Editar Cliente" onclick="PF('Editar').show();" type="button" />
-                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" header="Confirmação" severity="alert" widgetVar="confirmDialog">
-                            <h:outputText value="Tem certeza que deseja deletar?" />
-                            <p:commandButton value="Sim" action="#{Clientebean.Deletar}" update=":mainForm:growl" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('confirmDialog').hide();PF('Editar').hide();" />
-                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                        </p:confirmDialog>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" header="Confirmação" severity="alert" widgetVar="confirmDialog">
+                        <h:outputText value="Tem certeza que deseja deletar?" />
+                        <p:commandButton value="Sim" action="#{Clientebean.Deletar}" update=":mainForm:growl" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('confirmDialog').hide();PF('Editar').hide();" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
 
                 </h:form>
 
 
 
-                <p:dialog id="dialogId" widgetVar="Cadastrar" header="Adicionar Cliente" modal="true" closable="true" width="17vw">
+                <p:dialog id="dialogId" widgetVar="Cadastrar" header="Adicionar Cliente" modal="true" closable="true" width="20vw">
                     <h:form id="cadastrarForm">
                         <h:outputLabel value="Nome:" />
                         <p:inputText value="#{Clientebean.nome}" />
@@ -65,18 +65,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                         <h:outputLabel value="UF" />
                         <p:inputText value="#{Clientebean.uf}" />
                         <br/>
+                        <br/>
                         <p:commandButton value="Salvar" action="#{Clientebean.Registrar}" update=":mainForm:growl"  oncomplete="PF('Cadastrar').hide()"/>
                     </h:form>
                 </p:dialog>
 
-                <p:dialog id="dialogId1" widgetVar="Editar" header="Editar Cliente" modal="true" closable="true" width="17vw">
+                <p:dialog id="dialogId1" widgetVar="Editar" header="Editar Cliente" modal="true" closable="true" width="20vw">
                     <h:form id="editarForm">
 
                         <p:selectOneMenu id="listaCliente" style="width:12rem" value="#{Clientebean.clienteSelecionado}">
+                            <f:selectItem itemLabel="Selecionar" itemValue="" noSelectionOption="true" />
                             <f:selectItems value="#{Clientebean.listaDeClientes}" var="cliente" itemLabel="#{cliente}" itemValue="#{cliente}" />
                             <p:ajax event="change" listener="#{Clientebean.onClienteChange}" update="editarForm"/>
                         </p:selectOneMenu>
-
+                        <br/>
                         <h:outputLabel value="Nome:" />
                         <p:inputText value="#{Clientebean.nome}" />
                         <h:outputLabel value="Cpf" />
@@ -90,13 +92,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                         <h:outputLabel value="UF" />
                         <p:inputText value="#{Clientebean.uf}" />
                         <p:commandButton value="Salvar" action="#{Clientebean.Editar}" update=":mainForm:growl"  oncomplete="PF('Editar').hide()"/>
-                        
-                        
+
+
 
                         <!-- Botão de Deletar -->
                         <p:commandButton id="deleteButton" value="Deletar" action="#{Clientebean.Deletar}" update=":mainForm:growl" oncomplete="PF('Editar').hide()" onclick="PF('confirmDialog').show(); return false;" />
 
-                       
+
 
                     </h:form>
                 </p:dialog>

@@ -18,7 +18,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
         <header>
             <img src="./img/Header.png" alt="Logo"/>
-            
+
         </header>
         <div id="Pagina">
             <nav>
@@ -32,11 +32,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <p:growl id="growl" showDetail="true" sticky="false" life="3000"/>
                     <p:commandButton value="Registrar" onclick="PF('Cadastrar').show();" type="button" />
                     <p:commandButton value="Editar" onclick="PF('Editar').show();" type="button" />
-                                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" header="Confirmação" severity="alert" widgetVar="confirmDialog">
-                            <h:outputText value="Tem certeza que deseja deletar?" />
-                            <p:commandButton value="Sim" action="#{Veiculobean.Deletar}" update=":mainframe:growl" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('Editar').hide();PF('confirmDialog').hide();" />
-                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                        </p:confirmDialog>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" header="Confirmação" severity="alert" widgetVar="confirmDialog">
+                        <h:outputText value="Tem certeza que deseja deletar?" />
+                        <p:commandButton value="Sim" action="#{Veiculobean.Deletar}" update=":mainframe:growl" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" oncomplete="PF('Editar').hide();PF('confirmDialog').hide();" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
                 </h:form>
 
                 <p:dialog id="dialogId" widgetVar="Cadastrar" header="Adicionar Veiculos" modal="true" closable="true" width="300px" height="400px">
@@ -70,9 +70,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 <p:dialog id="dialogId1" widgetVar="Editar" header="Editar veiculos" modal="true" closable="true" width="300px" height="450px">
                     <h:form id="editarForm">
                         <p:selectOneMenu id="listaCliente" style="width:12rem" value="#{Veiculobean.veiculoSelecionado}">
+                            <f:selectItem itemLabel="Selecionar" itemValue="" noSelectionOption="true" />
+
                             <f:selectItems value="#{Veiculobean.listarDeVeiculos}" var="cliente" itemLabel="#{cliente}" itemValue="#{cliente}" />
                             <p:ajax event="change" listener="#{Veiculobean.onClienteChange}" update="editarForm"/>
                         </p:selectOneMenu>
+                        <br/>
 
                         <h:outputLabel value="Número:"/>
                         <p:inputText value="#{Veiculobean.numero}"/>

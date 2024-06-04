@@ -142,6 +142,8 @@ public class Clientebean implements Serializable {
         } else{
          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "falhou", "Falhou ao deleta cliente"));  
         }
+        
+        
     }
 
     public Clientebean() {
